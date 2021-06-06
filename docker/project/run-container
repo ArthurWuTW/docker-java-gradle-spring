@@ -1,0 +1,38 @@
+#!/usr/bin/env bash
+
+source $(dirname $0)/common.sh
+source $(dirname $0)/utils.sh
+
+
+GRAPHICS_OPTS="\
+    --env DISPLAY=$DISPLAY \
+    --volume /tmp/.X11-unix:/tmp/.X11-unix \
+"
+parse_arguments() {
+    COMMAND=""
+    while [[ $# -gt 0 ]]; do
+        case $1 in
+            *)
+                COMMAND+="$1 "
+            shift;;
+        esac
+    done
+}
+
+
+run_container() {
+
+    docker run \
+        --privileged=true \
+        --name $CONTAINER_NAME \
+        --rm \
+        --volume $HOME/Desktop:/home/$CONTAINER_USER/Desktop \
+        --user $CONTAINER_USER \
+        $EXTRA_CONTAINER_OPTS \
+        $GRAPHICS_OPTS \
+        $IMAGE_NAME \
+        $COMMAND || exit_on_error
+}
+
+parse_arguments $@
+run_container $@

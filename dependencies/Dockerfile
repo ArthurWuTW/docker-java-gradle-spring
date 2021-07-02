@@ -41,6 +41,15 @@ RUN apt-get update \
         gcc
 
 # Install Zulu JDK 8
+COPY install-jdk utils.sh ./
+RUN ./install-jdk && \
+  rm install-jdk utils.sh
+
+ENV PATH="/opt/zulu8.54.0.21-ca-jdk8.0.292-linux_x64/bin:${PATH}"
+ENV JAVA_HOME="/opt/zulu8.54.0.21-ca-jdk8.0.292-linux_x64"
+
+
+
 
 # Install Gradle
 

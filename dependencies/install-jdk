@@ -1,0 +1,8 @@
+#!/usr/bin/env bash
+
+source utils.sh
+
+cd /tmp || exit_on_error
+wget https://cdn.azul.com/zulu/bin/zulu8.54.0.21-ca-jdk8.0.292-linux_x64.tar.gz || exit_on_error
+sudo tar -xvf zulu8.54.0.21-ca-jdk8.0.292-linux_x64.tar.gz --directory /opt/ || exit_on_error
+rm zulu8.54.0.21-ca-jdk8.0.292-linux_x64.tar.gz || exit_on_error

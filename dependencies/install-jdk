@@ -2,7 +2,11 @@
 
 source utils.sh
 
-cd /tmp || exit_on_error
-wget https://cdn.azul.com/zulu/bin/zulu8.54.0.21-ca-jdk8.0.292-linux_x64.tar.gz || exit_on_error
-sudo tar -xvf zulu8.54.0.21-ca-jdk8.0.292-linux_x64.tar.gz --directory /opt/ || exit_on_error
-rm zulu8.54.0.21-ca-jdk8.0.292-linux_x64.tar.gz || exit_on_error
+chmod +x /home/${CONTAINER_USER:?}/lib/invPtrLoc.config
+chmod +x /home/${CONTAINER_USER:?}/lib/fmw_12.1.3.0.0_wls.jar
+tar -xvf jdk-8u291-linux-x64.tar.gz --directory /home/${CONTAINER_USER:?}/lib/ || exit_on_error
+chown ${CONTAINER_USER:?}:${CONTAINER_USER:?} /home/${CONTAINER_USER:?}/lib/*
+
+./createCentralInventory.sh /home/${CONTAINER_USER:?}/lib/Inventroy ${CONTAINER_USER:?}
+
+su -c 'export PATH=/home/'${CONTAINER_USER:?}'/lib/jdk1.8.0_291/bin:${PATH} && export JAVA_HOME=/home/'${CONTAINER_USER:?}'/lib/jdk1.8.0_291 && /home/'${CONTAINER_USER:?}'/lib/script-run-inst-weblogic' ${CONTAINER_USER:?}

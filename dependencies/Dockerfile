@@ -40,18 +40,24 @@ RUN apt-get update \
         vim \
         gcc
 
-# Install Zulu JDK 8
-COPY install-jdk utils.sh ./
+# Install JDK 8 and weblogic
+RUN apt-get install -y alien \
+    libxrender1 \
+    libxtst6 \
+    libxi6
+RUN mkdir -p /home/${CONTAINER_USER:?}/lib/oraInst.loc
+RUN chmod +x /home/${CONTAINER_USER:?}/lib/oraInst.loc
+COPY oracle/invPtrLoc.config \
+     oracle/fmw_12.1.3.0.0_wls.jar \
+     oracle/responseFile \
+     oracle/script-run-inst-weblogic /home/${CONTAINER_USER:?}/lib/
+
+COPY install-jdk utils.sh oracle/jdk-8u291-linux-x64.tar.gz oracle/createCentralInventory.sh ./
 RUN ./install-jdk && \
-  rm install-jdk utils.sh
+  rm install-jdk utils.sh jdk-8u291-linux-x64.tar.gz
 
-ENV PATH="/opt/zulu8.54.0.21-ca-jdk8.0.292-linux_x64/bin:${PATH}"
-ENV JAVA_HOME="/opt/zulu8.54.0.21-ca-jdk8.0.292-linux_x64"
-
-
-
-
-# Install Gradle
+ENV PATH="/home/${CONTAINER_USER:?}/lib/jdk1.8.0_291/bin:${PATH}"
+ENV JAVA_HOME="/home/${CONTAINER_USER:?}/lib/jdk1.8.0_291"
 
 COPY enter-container-shell \
     infinite-loop \

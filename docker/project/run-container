@@ -3,9 +3,11 @@
 source $(dirname $0)/common.sh
 source $(dirname $0)/utils.sh
 
+export IP=$(ifconfig en0 | grep inet | awk '$1=="inet" {print $2}')
+xhost + $IP
 
 GRAPHICS_OPTS="\
-    --env DISPLAY=$DISPLAY \
+    --env DISPLAY=$IP:0 \
     --volume /tmp/.X11-unix:/tmp/.X11-unix \
 "
 parse_arguments() {

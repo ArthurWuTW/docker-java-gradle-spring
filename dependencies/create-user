@@ -24,3 +24,6 @@ apt-get update
 apt-get install -y sudo || exit_on_error
 echo "${CONTAINER_USER:?} ALL=(ALL) NOPASSWD: ALL" >> /etc/sudoers \
     || exit_on_error
+
+mkdir /home/${CONTAINER_USER:?}/lib
+chown ${CONTAINER_USER:?}:${CONTAINER_USER:?} /home/${CONTAINER_USER:?}/lib

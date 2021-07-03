@@ -30,6 +30,7 @@ run_container() {
         --rm \
         --volume $HOME/Desktop:/home/$CONTAINER_USER/Desktop \
         --user $CONTAINER_USER \
+        --net="host" \
         $EXTRA_CONTAINER_OPTS \
         $GRAPHICS_OPTS \
         $IMAGE_NAME \

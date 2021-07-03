@@ -1,0 +1,5 @@
+#!/usr/bin/env bash
+
+source utils.sh
+
+tar -xvf eclipse-jee-2020-03-R-incubation-linux-gtk-x86_64.tar.gz --directory /home/${CONTAINER_USER:?}/lib/ || exit_on_error

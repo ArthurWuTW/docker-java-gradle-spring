@@ -61,6 +61,17 @@ RUN ./install-jdk && \
 ENV PATH="/home/${CONTAINER_USER:?}/lib/jdk1.8.0_291/bin:${PATH}"
 ENV JAVA_HOME="/home/${CONTAINER_USER:?}/lib/jdk1.8.0_291"
 
+# Install GUI Utils
+RUN apt-get update \
+    && apt-get install -y \
+        firefox \
+        nautilus
+
+# Install Eclipse
+COPY install-eclipse utils.sh eclipse/eclipse-jee-2020-03-R-incubation-linux-gtk-x86_64.tar.gz ./
+RUN ./install-eclipse && \
+  rm install-eclipse utils.sh eclipse-jee-2020-03-R-incubation-linux-gtk-x86_64.tar.gz
+
 COPY enter-container-shell \
     infinite-loop \
     /usr/local/bin/

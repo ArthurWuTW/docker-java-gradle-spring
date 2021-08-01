@@ -58,8 +58,8 @@ COPY install-jdk utils.sh oracle/jdk-8u291-linux-x64.tar.gz oracle/createCentral
 RUN ./install-jdk && \
   rm install-jdk utils.sh jdk-8u291-linux-x64.tar.gz
 
-ENV PATH="/home/${CONTAINER_USER:?}/lib/jdk1.8.0_291/bin:${PATH}"
-ENV JAVA_HOME="/home/${CONTAINER_USER:?}/lib/jdk1.8.0_291"
+ENV PATH="/home/${CONTAINER_USER}/lib/jdk1.8.0_291/bin:${PATH}"
+ENV JAVA_HOME="/home/${CONTAINER_USER}/lib/jdk1.8.0_291"
 
 # Install GUI Utils
 RUN apt-get update \

@@ -45,14 +45,14 @@ RUN apt-get install -y alien \
     libxrender1 \
     libxtst6 \
     libxi6
-RUN mkdir -p /home/${CONTAINER_USER:?}/lib/oraInst.loc
-RUN chmod +x /home/${CONTAINER_USER:?}/lib/oraInst.loc
+RUN mkdir -p /home/${CONTAINER_USER}/lib/oraInst.loc
+RUN chmod +x /home/${CONTAINER_USER}/lib/oraInst.loc
 COPY oracle/invPtrLoc.config \
      oracle/fmw_12.1.3.0.0_wls.jar \
      oracle/responseFile \
      oracle/script-run-inst-weblogic \
      oracle/script-weblogic-config \
-     oracle/script-start-weblogic /home/${CONTAINER_USER:?}/lib/
+     oracle/script-start-weblogic /home/${CONTAINER_USER}/lib/
 
 COPY install-jdk utils.sh oracle/jdk-8u291-linux-x64.tar.gz oracle/createCentralInventory.sh ./
 RUN ./install-jdk && \

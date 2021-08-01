@@ -38,7 +38,7 @@ pipeline {
                     #!/bin/bash
                     cd /home/arthur/Desktop/jenkins-tmp-dir
                     cd ./docker-java-weblogic-eclipse/docker
-                    ./project-stop-container
+                    ./project-stop-container || echo 'No container started!'
                 '''
             }
         }

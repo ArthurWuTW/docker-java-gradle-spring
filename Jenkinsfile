@@ -13,9 +13,6 @@ pipeline {
                     #!/bin/bash
                     cd /home/arthur/Desktop/jenkins-tmp-dir
                     git clone https://github.com/ArthurWuTW/docker-java-weblogic-eclipse
-                    cp ./3party/eclipse-jee-2020-03-R-incubation-linux-gtk-x86_64.tar.gz ./docker-java-weblogic-eclipse/dependencies/eclipse/
-                    cp ./3party/fmw_12.1.3.0.0_wls.jar ./docker-java-weblogic-eclipse/dependencies/oracle/
-                    cp ./3party/jdk-8u291-linux-x64.tar.gz ./docker-java-weblogic-eclipse/dependencies/oracle/
                 '''
             }
         }
